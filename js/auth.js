@@ -2,7 +2,7 @@
 const users = {
     'admin': {
         password: 'admin123',
-        role: 'admin',
+        role: 'user',
         email: 'admin@empresa.com'
     },
     'usuario': {
