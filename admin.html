@@ -1,25 +1,55 @@
-<div class="admin-panel">
-    <h2>Administración de Usuarios</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <!-- Mismo header que menu.html -->
+    </header>
     
-    <!-- Formulario para agregar usuarios -->
-    <div class="admin-section" v-if="checkPermission('admin')">
-        <h3>Agregar Nuevo Usuario</h3>
-        <form id="addUserForm">
-            <input type="text" placeholder="Username" required>
-            <input type="password" placeholder="Password" required>
-            <select id="userRole">
-                <option value="user">Usuario Normal</option>
-                <option value="admin">Administrador</option>
-            </select>
-            <button type="submit">Crear Usuario</button>
-        </form>
-    </div>
+    <main class="main-content">
+        <nav class="menu-nav">
+            <!-- Mismo menú que menu.html -->
+        </nav>
+        
+        <section class="content-section">
+            <h2>Panel de Administración</h2>
+            <div class="admin-panel">
+                <div class="admin-section">
+                    <h3>Agregar Usuario</h3>
+                    <form id="addUserForm">
+                        <input type="text" id="newUsername" placeholder="Usuario" required>
+                        <input type="password" id="newPassword" placeholder="Contraseña" required>
+                        <select id="newUserRole">
+                            <option value="user">Usuario Normal</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                        <button type="submit">Crear Usuario</button>
+                    </form>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>Usuarios Existentes</h3>
+                    <table id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
     
-    <!-- Lista de usuarios -->
-    <div class="admin-section">
-        <h3>Usuarios Existentes</h3>
-        <table id="usersTable">
-            <!-- Se llena dinámicamente con JS -->
-        </table>
-    </div>
-</div>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
