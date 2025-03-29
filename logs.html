@@ -1,22 +1,46 @@
-<div class="logs-container">
-    <h2>Registro de Actividades</h2>
-    <div class="filters">
-        <input type="date" id="dateFilter">
-        <select id="userFilter">
-            <option value="all">Todos los usuarios</option>
-        </select>
-    </div>
-    <table id="logsTable">
-        <thead>
-            <tr>
-                <th>Fecha/Hora</th>
-                <th>Usuario</th>
-                <th>Acción</th>
-                <th>Detalles</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Se llena dinámicamente -->
-        </tbody>
-    </table>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <!-- Mismo header que menu.html -->
+    </header>
+    
+    <main class="main-content">
+        <nav class="menu-nav">
+            <!-- Mismo menú que menu.html -->
+        </nav>
+        
+        <section class="content-section">
+            <h2>Registro de Actividades</h2>
+            <div class="logs-container">
+                <div class="filters">
+                    <input type="date" id="dateFilter">
+                    <select id="userFilter">
+                        <option value="all">Todos los usuarios</option>
+                    </select>
+                </div>
+                <table id="logsTable">
+                    <thead>
+                        <tr>
+                            <th>Fecha/Hora</th>
+                            <th>Usuario</th>
+                            <th>Acción</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/logs.js"></script>
+</body>
+</html>
