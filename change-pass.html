@@ -1,14 +1,81 @@
-<div class="password-change">
-    <h2>Cambio de Contraseña</h2>
-    <form id="changePassForm">
-        <div v-if="isAdmin">
-            <label>Usuario:</label>
-            <select id="targetUser"></select>
-        </div>
-        <label>Contraseña Actual:</label>
-        <input type="password" id="currentPass" v-if="!isAdmin">
-        <label>Nueva Contraseña:</label>
-        <input type="password" id="newPass" required>
-        <button type="submit">Actualizar</button>
-    </form>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <!-- Mismo header que menu.html -->
+    </header>
+    
+    <main class="main-content">
+        <nav class="menu-nav">
+            <!-- Mismo menú que menu.html -->
+        </nav>
+        
+        <section class="content-section">
+            <h2>Cambiar Contraseña</h2>
+            <div class="password-change">
+                <form id="changePassForm">
+                    <div id="adminFields" style="display:none;">
+                        <label>Usuario:</label>
+                        <select id="targetUser"></select>
+                    </div>
+                    
+                    <div id="currentPassField">
+                        <label>Contraseña Actual:</label>
+                        <input type="password" id="currentPass" required>
+                    </div>
+                    
+                    <label>Nueva Contraseña:</label>
+                    <input type="password" id="newPass" required>
+                    
+                    <button type="submit">Actualizar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = sessionStorage.getItem('username');
+            const isAdmin = users[currentUser] && users[currentUser].role === 'admin';
+            
+            if (isAdmin) {
+                document.getElementById('adminFields').style.display = 'block';
+                document.getElementById('currentPassField').style.display = 'none';
+                
+                const select = document.getElementById('targetUser');
+                Object.keys(users).forEach(user => {
+                    const option = document.createElement('option');
+                    option.value = user;
+                    option.textContent = user;
+                    select.appendChild(option);
+                });
+            }
+            
+            document.getElementById('changePassForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = isAdmin ? 
+                    document.getElementById('targetUser').value : 
+                    currentUser;
+                
+                const newPass = document.getElementById('newPass').value;
+                
+                if (isAdmin || document.getElementById('currentPass').value === users[username].password) {
+                    users[username].password = newPass;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    logActivity(currentUser, 'password_change', `Contraseña actualizada para ${username}`);
+                    alert('Contraseña actualizada con éxito');
+                } else {
+                    alert('Contraseña actual incorrecta');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
