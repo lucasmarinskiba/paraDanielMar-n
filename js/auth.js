@@ -1,34 +1,68 @@
-// Base de datos simulada
-const users = {
+// Base de datos de usuarios (simulada)
+let users = JSON.parse(localStorage.getItem('users')) || {
     'admin': {
         password: 'admin123',
-        role: 'user',
+        role: 'admin',
         email: 'admin@empresa.com'
     },
     'usuario': {
         password: 'clave123',
-        role: 'usuario',
+        role: 'user',
         email: 'usuario@empresa.com'
     }
 };
 
 // Registro de actividades
-const activityLog = [];
+let activityLog = JSON.parse(localStorage.getItem('activityLog')) || [];
 
+// Función para registrar actividades
 function logActivity(username, action, details) {
-    activityLog.push({
+    const entry = {
         timestamp: new Date().toISOString(),
         username,
         action,
         details
-    });
-    // En un sistema real, enviarías esto al servidor
+    };
+    activityLog.push(entry);
     localStorage.setItem('activityLog', JSON.stringify(activityLog));
 }
 
-// Verificar permisos
-function checkPermission(requiredRole) {
-    const user = sessionStorage.getItem('username');
-    return users[user] && 
-           (users[user].role === 'admin' || users[user].role === requiredRole);
-}
+// Manejo del login
+document.addEventListener('DOMContentLoaded', function() {
+    // Login
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if (users[username] && users[username].password === password) {
+                sessionStorage.setItem('username', username);
+                logActivity(username, 'login', 'Inicio de sesión exitoso');
+                window.location.href = 'menu.html';
+            } else {
+                document.getElementById('errorMessage').textContent = 'Usuario o contraseña incorrectos';
+            }
+        });
+    }
+    
+    // Logout
+    const logoutButton = document.getElementById('logoutButton');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function() {
+            const username = sessionStorage.getItem('username');
+            logActivity(username, 'logout', 'Cierre de sesión');
+            sessionStorage.removeItem('username');
+            window.location.href = 'index.html';
+        });
+    }
+    
+    // Protección de rutas
+    if (!window.location.pathname.endsWith('index.html')) {
+        const username = sessionStorage.getItem('username');
+        if (!username || !users[username]) {
+            window.location.href = 'index.html';
+        }
+    }
+});
