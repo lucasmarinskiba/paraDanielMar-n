@@ -1,44 +1,34 @@
-// Credenciales válidas (en un caso real, esto vendría de una base de datos o servicio)
-const validUsers = {
-    'admin': 'admin123',
-    'usuario': 'clave123'
+// Base de datos simulada
+const users = {
+    'admin': {
+        password: 'admin123',
+        role: 'admin',
+        email: 'admin@empresa.com'
+    },
+    'usuario': {
+        password: 'clave123',
+        role: 'user',
+        email: 'usuario@empresa.com'
+    }
 };
 
-// Verificar si el usuario ya está autenticado
-document.addEventListener('DOMContentLoaded', function() {
-    if (window.location.pathname.endsWith('menu.html')) {
-        const username = sessionStorage.getItem('username');
-        if (!username || !validUsers[username]) {
-            window.location.href = 'index.html';
-        } else {
-            document.getElementById('loggedInUser').textContent = `Usuario: ${username}`;
-        }
-    }
-});
+// Registro de actividades
+const activityLog = [];
 
-// Manejar el formulario de login
-if (document.getElementById('loginForm')) {
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        
-        if (validUsers[username] && validUsers[username] === password) {
-            // Credenciales válidas
-            sessionStorage.setItem('username', username);
-            window.location.href = 'menu.html';
-        } else {
-            // Credenciales inválidas
-            document.getElementById('errorMessage').textContent = 'Usuario o contraseña incorrectos';
-        }
+function logActivity(username, action, details) {
+    activityLog.push({
+        timestamp: new Date().toISOString(),
+        username,
+        action,
+        details
     });
+    // En un sistema real, enviarías esto al servidor
+    localStorage.setItem('activityLog', JSON.stringify(activityLog));
 }
 
-// Manejar el logout
-if (document.getElementById('logoutButton')) {
-    document.getElementById('logoutButton').addEventListener('click', function() {
-        sessionStorage.removeItem('username');
-        window.location.href = 'index.html';
-    });
+// Verificar permisos
+function checkPermission(requiredRole) {
+    const user = sessionStorage.getItem('username');
+    return users[user] && 
+           (users[user].role === 'admin' || users[user].role === requiredRole);
 }
