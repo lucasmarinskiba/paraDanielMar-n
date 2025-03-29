@@ -1,0 +1,14 @@
+<div class="password-change">
+    <h2>Cambio de Contraseña</h2>
+    <form id="changePassForm">
+        <div v-if="isAdmin">
+            <label>Usuario:</label>
+            <select id="targetUser"></select>
+        </div>
+        <label>Contraseña Actual:</label>
+        <input type="password" id="currentPass" v-if="!isAdmin">
+        <label>Nueva Contraseña:</label>
+        <input type="password" id="newPass" required>
+        <button type="submit">Actualizar</button>
+    </form>
+</div>
