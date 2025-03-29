@@ -59,6 +59,12 @@ body {
     height: 100%; /* Ocupa toda la altura del header */
 }
 
+.logo-link {
+    display: flex;           /* Mantiene la alineación con flexbox */
+    align-items: center;     /* Centra verticalmente el logo */
+    height: 100%;           /* Ocupa toda la altura disponible */
+}
+
 /* Estilos para el texto "Sistema" */
 .logo-container h1 {
     margin: 0 0 0 15px; /* 15px de margen izquierdo */
