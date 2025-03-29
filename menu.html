@@ -9,35 +9,41 @@
 <body>
     <header class="main-header">
         <div class="logo-container">
-            <img src="images/Marín Daniel lopotipo2.png" alt="Logo de la empresa" class="logo">
-            <h1>Mi Aplicación</h1>
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <h1>Sistema</h1>
         </div>
         <div class="user-info">
             <span id="loggedInUser"></span>
-            <button id="logoutButton" class="logout-button">Cerrar Sesión</button>
+            <button id="logoutButton" class="logout-button">Cerrar sesión</button>
         </div>
     </header>
     
     <main class="main-content">
         <nav class="menu-nav">
             <ul>
-                <li><a href="#" class="menu-item">Opción 1</a></li>
-                <li><a href="#" class="menu-item">Opción 2</a></li>
-                <li><a href="#" class="menu-item">Opción 3</a></li>
-                <li><a href="#" class="menu-item">Opción 4</a></li>
+                <li><a href="change-pass.html">Cambiar contraseña</a></li>
+                <li id="adminLink" style="display:none;"><a href="admin.html">Administración</a></li>
+                <li id="logsLink" style="display:none;"><a href="logs.html">Registros</a></li>
             </ul>
         </nav>
         
         <section class="content-section">
-            <h2>Bienvenido al sistema</h2>
-            <p>Seleccione una opción del menú para comenzar.</p>
+            <h2>Bienvenido <span id="welcomeUser"></span></h2>
+            <p>Seleccione una opción del menú.</p>
         </section>
     </main>
     
-    <footer class="main-footer">
-        <p>© 2023 Mi Empresa. Todos los derechos reservados.</p>
-    </footer>
-    
     <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = sessionStorage.getItem('username');
+            document.getElementById('welcomeUser').textContent = username;
+            
+            if (users[username] && users[username].role === 'admin') {
+                document.getElementById('adminLink').style.display = 'block';
+                document.getElementById('logsLink').style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
