@@ -7,7 +7,7 @@ const users = {
     },
     'usuario': {
         password: 'clave123',
-        role: 'user',
+        role: 'usuario',
         email: 'usuario@empresa.com'
     }
 };
