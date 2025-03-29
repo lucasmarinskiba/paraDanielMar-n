@@ -66,3 +66,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// Logo clickeable dinámico
+document.addEventListener('DOMContentLoaded', function() {
+    const logoLink = document.querySelector('.logo-link');
+    if (logoLink) {
+        logoLink.addEventListener('click', function(e) {
+            if (!window.location.pathname.endsWith('index.html')) {
+                window.location.href = 'index.html'; // Redirige solo si NO es la página principal
+            }
+            // Si ya está en index.html, no hace nada
+        });
+    }
+});
