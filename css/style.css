@@ -70,7 +70,7 @@ body {
 
 /* Estilos para el logo */
 .logo {
-    height: 50px; /* Ajusta según tu logo */
+    height: 130px; /* Ajusta según tu logo */
     width: auto;
     object-fit: contain;
 }
