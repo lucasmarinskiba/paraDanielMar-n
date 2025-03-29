@@ -1,0 +1,25 @@
+<div class="admin-panel">
+    <h2>Administración de Usuarios</h2>
+    
+    <!-- Formulario para agregar usuarios -->
+    <div class="admin-section" v-if="checkPermission('admin')">
+        <h3>Agregar Nuevo Usuario</h3>
+        <form id="addUserForm">
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <select id="userRole">
+                <option value="user">Usuario Normal</option>
+                <option value="admin">Administrador</option>
+            </select>
+            <button type="submit">Crear Usuario</button>
+        </form>
+    </div>
+    
+    <!-- Lista de usuarios -->
+    <div class="admin-section">
+        <h3>Usuarios Existentes</h3>
+        <table id="usersTable">
+            <!-- Se llena dinámicamente con JS -->
+        </table>
+    </div>
+</div>
