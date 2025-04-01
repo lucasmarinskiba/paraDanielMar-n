@@ -65,3 +65,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+document.getElementById('changePassForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const currentUser = sessionStorage.getItem('username');
+    const isAdmin = users[currentUser]?.role === 'admin';
+    const newPass = document.getElementById('newPass').value;
+    const confirmPass = document.getElementById('confirmNewPass').value;
+
+    // Validación 1: Coincidencia de contraseñas nuevas
+    if (newPass !== confirmPass) {
+        alert('Las nuevas contraseñas no coinciden');
+        return;
+    }
+
+    // Validación 2: Longitud mínima
+    if (newPass.length < 6) {
+        alert('La contraseña debe tener al menos 6 caracteres');
+        return;
+    }
+
+    if (isAdmin) {
+        // Lógica para admin (sin contraseña actual)
+        const targetUser = document.getElementById('targetUser').value;
+        users[targetUser].password = newPass;
+    } else {
+        // Validación 3: Contraseña actual correcta
+        const currentPass = document.getElementById('currentPass').value;
+        if (users[currentUser].password !== currentPass) {
+            alert('Contraseña actual incorrecta');
+            return;
+        }
+        users[currentUser].password = newPass;
+    }
+
+    // Actualizar y notificar
+    localStorage.setItem('users', JSON.stringify(users));
+    alert('Contraseña actualizada con éxito');
+    window.location.href = 'menu.html';
+});
