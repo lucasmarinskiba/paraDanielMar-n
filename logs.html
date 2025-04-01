@@ -9,8 +9,9 @@
 <body>
     <header class="main-header">
         <div class="logo-container">
-            <a href="menu.html" class="logo-link"></a> <!-- Cambia "index.html" por tu página principal -->
-            <img src="images/Marín Daniel lopotipo2.png" alt="Logo" class="logo">
+            <a href="menu.html" class="logo-link">
+                <img src="images/logo.png" alt="Logo" class="logo">
+            </a>
             <h1>Sistema</h1>
         </div>
         <div class="user-info">
@@ -20,16 +21,17 @@
     </header>
     
     <main class="main-content">
-        <nav class="logs-nav">
+        <nav class="menu-nav">
             <ul>
                 <li><a href="change-pass.html">Cambiar contraseña</a></li>
-                <li id="adminLink" style="display:none;"><a href="admin.html">Administración</a></li>
+                <li><a href="admin.html">Administración</a></li>
+                <li><a href="logs.html">Registros</a></li>
             </ul>
         </nav>
         
         <section class="content-section">
-            <h2>Registro de Actividades</h2>
             <div class="logs-container">
+                <h2>Registro de Actividades</h2>
                 <div class="filters">
                     <input type="date" id="dateFilter">
                     <select id="userFilter">
