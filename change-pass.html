@@ -8,49 +8,42 @@
 </head>
 <body>
     <header class="main-header">
-      <div class="logo-container">
-         <a href="menu.html" class="logo-link"></a> <!-- Cambia "index.html" por tu página principal -->
-         <img src="images/Marín Daniel lopotipo2.png" alt="Logo" class="logo">
-         <h1>Sistema</h1>
-      </div>
-      <div class="user-info">
+        <div class="logo-container">
+            <a href="menu.html" class="logo-link">
+                <img src="images/logo.png" alt="Logo" class="logo">
+            </a>
+            <h1>Sistema</h1>
+        </div>
+        <div class="user-info">
             <span id="loggedInUser"></span>
             <button id="logoutButton" class="logout-button">Cerrar sesión</button>
-      </div>
-    </header>
+        </div>
     </header>
     
     <main class="main-content">
         <nav class="menu-nav">
             <ul>
-                <li id="adminLink" style="display:none;"><a href="admin.html">Administración</a></li>
-                <li id="logsLink" style="display:none;"><a href="logs.html">Registros</a></li>
+                <li><a href="change-pass.html">Cambiar contraseña</a></li>
+                <li><a href="admin.html">Administración</a></li>
+                <li><a href="logs.html">Registros</a></li>
             </ul>
         </nav>
         
         <section class="content-section">
-            <h2>Cambiar Contraseña</h2>
             <div class="password-change">
+                <h2>Cambiar Contraseña</h2>
                 <form id="changePassForm">
-                    <div id="adminFields" style="display:none;">
+                    <div id="adminFields" style="display: none;">
                         <label>Usuario:</label>
                         <select id="targetUser"></select>
                     </div>
-                    
                     <div id="currentPassField">
                         <label>Contraseña Actual:</label>
                         <input type="password" id="currentPass" required>
                     </div>
-                    
                     <label>Nueva Contraseña:</label>
                     <input type="password" id="newPass" required>
-
-                    <div id="adminPassForm" style="display:none;">
-                       <label>Seleccionar Usuario:</label>
-                       <select id="targetUser"></select>
-                    </div>
-                    
-                    <button id="submitChange">Actualizar</button>
+                    <button type="submit">Actualizar</button>
                 </form>
             </div>
         </section>
@@ -58,9 +51,9 @@
     
     <script src="js/auth.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             const currentUser = sessionStorage.getItem('username');
-            const isAdmin = users[currentUser] && users[currentUser].role === 'admin';
+            const isAdmin = users[currentUser]?.role === 'admin';
             
             if (isAdmin) {
                 document.getElementById('adminFields').style.display = 'block';
@@ -75,19 +68,19 @@
                 });
             }
             
-            document.getElementById('changePassForm').addEventListener('submit', function(e) {
+            document.getElementById('changePassForm').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const username = isAdmin ? 
                     document.getElementById('targetUser').value : 
                     currentUser;
-                
                 const newPass = document.getElementById('newPass').value;
                 
                 if (isAdmin || document.getElementById('currentPass').value === users[username].password) {
                     users[username].password = newPass;
                     localStorage.setItem('users', JSON.stringify(users));
-                    logActivity(currentUser, 'password_change', `Contraseña actualizada para ${username}`);
-                    alert('Contraseña actualizada con éxito');
+                    logActivity(currentUser, 'password_change', `Actualizó contraseña de ${username}`);
+                    alert('Contraseña actualizada');
+                    window.location.href = 'menu.html';
                 } else {
                     alert('Contraseña actual incorrecta');
                 }
