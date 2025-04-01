@@ -9,8 +9,9 @@
 <body>
     <header class="main-header">
         <div class="logo-container">
-            <a href="menu.html" class="logo-link"></a> <!-- Cambia "index.html" por tu página principal -->
-            <img src="images/Marín Daniel lopotipo2.png" alt="Logo" class="logo">
+            <a href="menu.html" class="logo-link">
+                <img src="images/logo.png" alt="Logo" class="logo">
+            </a>
             <h1>Sistema</h1>
         </div>
         <div class="user-info">
@@ -23,8 +24,8 @@
         <nav class="menu-nav">
             <ul>
                 <li><a href="change-pass.html">Cambiar contraseña</a></li>
-                <li id="adminLink" style="display:none;"><a href="admin.html">Administración</a></li>
-                <li id="logsLink" style="display:none;"><a href="logs.html">Registros</a></li>
+                <li id="adminLink"><a href="admin.html">Administración</a></li>
+                <li id="logsLink"><a href="logs.html">Registros</a></li>
             </ul>
         </nav>
         
@@ -36,14 +37,13 @@
     
     <script src="js/auth.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const username = sessionStorage.getItem('username');
-            document.getElementById('welcomeUser').textContent = username;
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = sessionStorage.getItem('username');
+            const isAdmin = users[user]?.role === 'admin';
             
-            if (users[username] && users[username].role === 'admin') {
-                document.getElementById('adminLink').style.display = 'block';
-                document.getElementById('logsLink').style.display = 'block';
-            }
+            document.getElementById('welcomeUser').textContent = user;
+            document.getElementById('adminLink').style.display = isAdmin ? 'block' : 'none';
+            document.getElementById('logsLink').style.display = isAdmin ? 'block' : 'none';
         });
     </script>
 </body>
