@@ -1,8 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     loadUsersTable();
     
-    // Agregar nuevo usuario
-    document.getElementById('addUserForm').addEventListener('submit', function(e) {
+    document.getElementById('addUserForm').addEventListener('submit', (e) => {
         e.preventDefault();
         const username = document.getElementById('newUsername').value.trim();
         const password = document.getElementById('newPassword').value;
@@ -11,11 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!users[username]) {
             users[username] = { password, role, email: '' };
             localStorage.setItem('users', JSON.stringify(users));
-            
-            const currentUser = sessionStorage.getItem('username');
-            logActivity(currentUser, 'user_create', `Usuario creado: ${username}`);
-            
-            alert('Usuario creado con éxito');
+            logActivity(sessionStorage.getItem('username'), 'user_create', `Creó al usuario ${username}`);
             loadUsersTable();
         } else {
             alert('El usuario ya existe');
@@ -30,48 +25,30 @@ function loadUsersTable() {
     Object.keys(users).forEach(username => {
         const user = users[username];
         const row = document.createElement('tr');
-        
         row.innerHTML = `
             <td>${username}</td>
             <td>${user.role}</td>
             <td>
-                <button onclick="resetPassword('${username}')">Resetear Pass</button>
+                <button onclick="resetPassword('${username}')">Resetear</button>
                 ${users[sessionStorage.getItem('username')].role === 'admin' ? 
                     `<button onclick="deleteUser('${username}')">Eliminar</button>` : ''}
             </td>
         `;
-        
         tbody.appendChild(row);
     });
 }
 
 function resetPassword(username) {
-    if (confirm(`¿Resetear contraseña de ${username} a "temp123"?`)) {
-        users[username].password = 'temp123';
-        localStorage.setItem('users', JSON.stringify(users));
-        
-        const currentUser = sessionStorage.getItem('username');
-        logActivity(currentUser, 'password_reset', `Contraseña reseteada para ${username}`);
-        
-        alert('Contraseña reseteada');
-        loadUsersTable();
-    }
+    users[username].password = 'temp123';
+    localStorage.setItem('users', JSON.stringify(users));
+    logActivity(sessionStorage.getItem('username'), 'password_reset', `Reseteó contraseña de ${username}`);
+    alert('Contraseña reseteada a "temp123"');
 }
 
 function deleteUser(username) {
-    if (username === 'admin') {
-        alert('No se puede eliminar al administrador principal');
-        return;
-    }
-    
-    if (confirm(`¿Eliminar permanentemente al usuario ${username}?`)) {
-        delete users[username];
-        localStorage.setItem('users', JSON.stringify(users));
-        
-        const currentUser = sessionStorage.getItem('username');
-        logActivity(currentUser, 'user_delete', `Usuario eliminado: ${username}`);
-        
-        alert('Usuario eliminado');
-        loadUsersTable();
-    }
+    if (username === 'admin') return alert('No se puede eliminar al admin');
+    delete users[username];
+    localStorage.setItem('users', JSON.stringify(users));
+    logActivity(sessionStorage.getItem('username'), 'user_delete', `Eliminó al usuario ${username}`);
+    loadUsersTable();
 }
