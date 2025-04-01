@@ -113,3 +113,15 @@ function changePassword() {
     alert('¡Contraseña actualizada!');
     window.location.href = 'menu.html'; // Redirigir después del cambio
 }
+
+// Ejemplo: Requerir mayúsculas y números
+if (!/[A-Z]/.test(newPass) || !/[0-9]/.test(newPass)) {
+    alert('La contraseña debe incluir mayúsculas y números');
+    return;
+}
+
+// Añade esto al guardar la contraseña
+users[targetUser].password = btoa(newPass); // Encripta en Base64 (no es segura, pero mejora la simulación)
+
+// Y al verificar:
+if (users[currentUser].password !== btoa(currentPass)) { ... }
