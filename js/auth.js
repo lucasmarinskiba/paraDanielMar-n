@@ -79,3 +79,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Función para cambiar contraseña
+function changePassword() {
+    const currentUser = sessionStorage.getItem('username');
+    const isAdmin = users[currentUser]?.role === 'admin';
+    
+    if (isAdmin) {
+        const targetUser = document.getElementById('targetUser').value;
+        const newPass = document.getElementById('newPass').value;
+        users[targetUser].password = newPass;
+    } else {
+        const currentPass = document.getElementById('currentPass').value;
+        const newPass = document.getElementById('newPass').value;
+        
+        if (users[currentUser].password === currentPass) {
+            users[currentUser].password = newPass;
+        } else {
+            alert('Contraseña actual incorrecta');
+            return;
+        }
+    }
+    
+    localStorage.setItem('users', JSON.stringify(users));
+    logActivity(currentUser, 'password_change', `Contraseña actualizada`);
+    alert('¡Contraseña cambiada con éxito!');
+}
