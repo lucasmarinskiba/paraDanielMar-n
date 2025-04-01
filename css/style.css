@@ -35,6 +35,21 @@ body {
     font-size: 1.8rem;
 }
 
+/* Estilos para el contenedor del logo en el login */
+.login-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Tamaño del logo y centrado */
+.logo-login {
+    height: 100px;         /* Tamaño aumentado */
+    width: auto;           /* Mantiene proporciones */
+    display: block;
+    margin: 0 auto;        /* Centrado horizontal */
+    object-fit: contain;   /* Evita distorsión */
+}
+
 /* Login */
 .login-container {
     max-width: 400px;
