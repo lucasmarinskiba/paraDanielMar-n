@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     loadLogs();
     loadUserFilter();
     
@@ -13,10 +13,7 @@ function loadLogs() {
 
 function loadUserFilter() {
     const select = document.getElementById('userFilter');
-    const users = new Set();
-    
-    const logs = JSON.parse(localStorage.getItem('activityLog')) || [];
-    logs.forEach(log => users.add(log.username));
+    const users = new Set(JSON.parse(localStorage.getItem('activityLog')).map(log => log.username));
     
     users.forEach(user => {
         const option = document.createElement('option');
@@ -27,18 +24,13 @@ function loadUserFilter() {
 }
 
 function filterLogs() {
-    const dateFilter = document.getElementById('dateFilter').value;
-    const userFilter = document.getElementById('userFilter').value;
+    const date = document.getElementById('dateFilter').value;
+    const user = document.getElementById('userFilter').value;
     
-    let logs = JSON.parse(localStorage.getItem('activityLog')) || [];
+    let logs = JSON.parse(localStorage.getItem('activityLog'));
     
-    if (dateFilter) {
-        logs = logs.filter(log => log.timestamp.startsWith(dateFilter));
-    }
-    
-    if (userFilter !== 'all') {
-        logs = logs.filter(log => log.username === userFilter);
-    }
+    if (date) logs = logs.filter(log => log.timestamp.startsWith(date));
+    if (user !== 'all') logs = logs.filter(log => log.username === user);
     
     renderLogs(logs);
 }
@@ -49,17 +41,12 @@ function renderLogs(logs) {
     
     logs.forEach(log => {
         const row = document.createElement('tr');
-        
-        const date = new Date(log.timestamp);
-        const formattedDate = date.toLocaleString();
-        
         row.innerHTML = `
-            <td>${formattedDate}</td>
+            <td>${new Date(log.timestamp).toLocaleString()}</td>
             <td>${log.username}</td>
             <td>${log.action}</td>
             <td>${log.details}</td>
         `;
-        
         tbody.appendChild(row);
     });
 }
