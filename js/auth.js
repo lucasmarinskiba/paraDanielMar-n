@@ -81,27 +81,35 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Función para cambiar contraseña
+// Versión mejorada con validaciones
 function changePassword() {
     const currentUser = sessionStorage.getItem('username');
+    if (!currentUser) return;
+
     const isAdmin = users[currentUser]?.role === 'admin';
-    
+    const newPass = document.getElementById('newPass').value;
+
+    // Validar nueva contraseña
+    if (newPass.length < 6) {
+        alert('La contraseña debe tener al menos 6 caracteres');
+        return;
+    }
+
     if (isAdmin) {
         const targetUser = document.getElementById('targetUser').value;
-        const newPass = document.getElementById('newPass').value;
         users[targetUser].password = newPass;
     } else {
         const currentPass = document.getElementById('currentPass').value;
-        const newPass = document.getElementById('newPass').value;
-        
-        if (users[currentUser].password === currentPass) {
-            users[currentUser].password = newPass;
-        } else {
+        if (users[currentUser].password !== currentPass) {
             alert('Contraseña actual incorrecta');
             return;
         }
+        users[currentUser].password = newPass;
     }
-    
+
+    // Guardar y notificar
     localStorage.setItem('users', JSON.stringify(users));
     logActivity(currentUser, 'password_change', `Contraseña actualizada`);
-    alert('¡Contraseña cambiada con éxito!');
+    alert('¡Contraseña actualizada!');
+    window.location.href = 'menu.html'; // Redirigir después del cambio
 }
