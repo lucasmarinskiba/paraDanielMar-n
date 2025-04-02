@@ -52,39 +52,42 @@ body {
 
 /* Login */
 /* Estilos para el formulario de login */
+/* Contenedor principal */
 .login-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 30px;
+    max-width: 400px; /* Reducir ancho total */
+    margin: 30px auto;
+    padding: 25px;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
+/* Campos de entrada */
 .input-group {
-    position: center;
-    margin-bottom: 25px;
-    width: 100%; /* Ocupa todo el ancho del contenedor */
-    max-width: 300px; /* Ancho máximo de los campos */
-    box-sizing: border-box; /* Evita desbordamiento */
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .input-group input {
     width: 100%;
-    padding: 10px 10px 10px 80px;
+    padding: 10px 10px 10px 85px; /* Ajuste de padding */
     border: 2px solid #3498db;
     border-radius: 4px;
     font-size: 14px;
+    box-sizing: border-box; /* Fundamental */
 }
 
+/* Etiquetas */
 .input-group label {
-    position: center;
-    left: 10px;
+    position: absolute;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
+    font-size: 13px;
     color: #3498db;
-    pointer-events: none;
-    transition: 0.3s;
+    background: white; /* Fondo para superposición */
+    padding: 0 5px;
 }
 
 /* Efecto para las etiquetas al enfocar */
