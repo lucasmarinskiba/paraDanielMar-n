@@ -115,3 +115,6 @@ function saveUsers() {
 // Modificar todas las instancias donde se actualizan usuarios:
 users[username].password = newPass;
 saveUsers(); // En lugar de localStorage.setItem...
+
+sessionStorage.removeItem('username'); // Cierra sesión
+window.location.href = 'index.html'; // Redirige al login
