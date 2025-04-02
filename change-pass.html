@@ -64,41 +64,59 @@
     
     <script src="js/auth.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const currentUser = sessionStorage.getItem('username');
-            const isAdmin = users[currentUser]?.role === 'admin';
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentUser = sessionStorage.getItem('username');
+        const isAdmin = users[currentUser]?.role === 'admin';
+
+        if (isAdmin) {
+            document.getElementById('adminFields').style.display = 'block';
+            document.getElementById('currentPassField').style.display = 'none';
             
-            if (isAdmin) {
-                document.getElementById('adminFields').style.display = 'block';
-                document.getElementById('currentPassField').style.display = 'none';
-                
-                const select = document.getElementById('targetUser');
-                Object.keys(users).forEach(user => {
-                    const option = document.createElement('option');
-                    option.value = user;
-                    option.textContent = user;
-                    select.appendChild(option);
-                });
-            }
-            
-            document.getElementById('changePassForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const username = isAdmin ? 
-                    document.getElementById('targetUser').value : 
-                    currentUser;
-                const newPass = document.getElementById('newPass').value;
-                
-                if (isAdmin || document.getElementById('currentPass').value === users[username].password) {
-                    users[username].password = newPass;
-                    localStorage.setItem('users', JSON.stringify(users));
-                    logActivity(currentUser, 'password_change', `Actualizó contraseña de ${username}`);
-                    alert('Contraseña actualizada');
-                    window.location.href = 'menu.html';
-                } else {
-                    alert('Contraseña actual incorrecta');
-                }
+            const select = document.getElementById('targetUser');
+            Object.keys(users).forEach(user => {
+                const option = document.createElement('option');
+                option.value = user;
+                option.textContent = user;
+                select.appendChild(option);
             });
+        }
+
+        document.getElementById('changePassForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = isAdmin ? 
+                document.getElementById('targetUser').value : 
+                currentUser;
+            
+            const newPass = document.getElementById('newPass').value;
+            const confirmPass = document.getElementById('confirmNewPass').value;
+
+            // Validaciones
+            if (newPass !== confirmPass) {
+                alert('Las contraseñas nuevas no coinciden');
+                return;
+            }
+
+            if (!isAdmin) {
+                const currentPass = document.getElementById('currentPass').value;
+                if (users[currentUser].password !== currentPass) {
+                    alert('Contraseña actual incorrecta');
+                    return;
+                }
+            }
+
+            // Actualizar contraseña
+            users[username].password = newPass;
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            // Registrar actividad
+            logActivity(currentUser, 'password_change', `Cambió contraseña de ${username}`);
+            
+            // Redirigir a login
+            alert('Contraseña actualizada. Por favor inicie sesión nuevamente.');
+            sessionStorage.removeItem('username'); // Cerrar sesión
+            window.location.href = 'index.html';
         });
-    </script>
+    });
+</script>
 </body>
 </html>
