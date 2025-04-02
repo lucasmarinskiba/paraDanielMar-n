@@ -62,7 +62,7 @@ body {
 }
 
 .input-group {
-    position: relative;
+    position: center;
     margin-bottom: 25px;
     width: 100%; /* Ocupa todo el ancho del contenedor */
     max-width: 300px; /* Ancho máximo de los campos */
@@ -78,7 +78,7 @@ body {
 }
 
 .input-group label {
-    position: absolute;
+    position: center;
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
