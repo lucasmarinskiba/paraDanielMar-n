@@ -64,9 +64,9 @@ body {
 .input-group {
     position: relative;
     margin-bottom: 25px;
-    width: 80%;  /* Reduce el ancho del contenedor */
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    max-width: 300px; /* Ancho máximo de los campos */
+    box-sizing: border-box; /* Evita desbordamiento */
 }
 
 .input-group input {
