@@ -51,6 +51,7 @@ body {
 }
 
 /* Login */
+/* Estilos para el formulario de login */
 .login-container {
     max-width: 400px;
     margin: 50px auto;
@@ -58,6 +59,39 @@ body {
     background: white;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 15px 15px 100px;
+    border: 2px solid #3498db;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.input-group label {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3498db;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+/* Efecto para las etiquetas al enfocar */
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
+    top: -10px;
+    left: 5px;
+    font-size: 12px;
+    background: white;
+    padding: 0 5px;
 }
 
 .login-button {
