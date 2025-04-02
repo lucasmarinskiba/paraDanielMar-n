@@ -105,3 +105,13 @@ document.getElementById('changePassForm').addEventListener('submit', function(e)
     alert('Contraseña actualizada con éxito');
     window.location.href = 'menu.html';
 });
+
+// Función mejorada para guardar usuarios
+function saveUsers() {
+    localStorage.setItem('users', JSON.stringify(users));
+    console.log('Usuarios guardados:', users); // Depuración
+}
+
+// Modificar todas las instancias donde se actualizan usuarios:
+users[username].password = newPass;
+saveUsers(); // En lugar de localStorage.setItem...
