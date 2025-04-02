@@ -10,7 +10,7 @@
     <header class="main-header">
         <div class="logo-container">
             <a href="menu.html" class="logo-link">
-                <img src="images/Marín Daniel lopotipo2.png" alt="Logo" class="logo">
+                <img src="images/logo.png" alt="Logo" class="logo">
             </a>
             <h1>Sistema</h1>
         </div>
@@ -33,16 +33,19 @@
             <div class="password-change">
                 <h2>Cambiar Contraseña</h2>
                 <form id="changePassForm">
-                    <div id="adminFields" style="display:none;">
+                    <!-- Campos para admin -->
+                    <div id="adminFields" style="display: none;">
                         <label>Usuario:</label>
                         <select id="targetUser"></select>
                     </div>
-                    
+
+                    <!-- Campo contraseña actual (solo usuarios normales) -->
                     <div id="currentPassField">
                         <label>Contraseña Actual:</label>
                         <input type="password" id="currentPass" required>
                     </div>
-                    
+
+                    <!-- Campos nuevos -->
                     <div class="form-group">
                         <label>Nueva Contraseña:</label>
                         <input type="password" id="newPass" required>
@@ -52,7 +55,7 @@
                         <label>Repetir Nueva Contraseña:</label>
                         <input type="password" id="confirmNewPass" required>
                     </div>
-                    
+
                     <button type="submit" class="login-button">Actualizar</button>
                 </form>
             </div>
@@ -63,13 +66,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const currentUser = sessionStorage.getItem('username');
-            const users = JSON.parse(localStorage.getItem('users')) || {}; // ¡Error corregido aquí!
+            const users = JSON.parse(localStorage.getItem('users')) || {};
             const isAdmin = users[currentUser]?.role === 'admin';
 
+            // Configurar select para admins
             if (isAdmin) {
                 document.getElementById('adminFields').style.display = 'block';
                 document.getElementById('currentPassField').style.display = 'none';
-                
+
                 const select = document.getElementById('targetUser');
                 Object.keys(users).forEach(user => {
                     const option = document.createElement('option');
@@ -79,38 +83,43 @@
                 });
             }
 
+            // Manejar envío del formulario
             document.getElementById('changePassForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                
+
                 const username = isAdmin ? 
                     document.getElementById('targetUser').value : 
                     currentUser;
-                
+
                 const newPass = document.getElementById('newPass').value;
                 const confirmPass = document.getElementById('confirmNewPass').value;
 
-                // Validaciones
+                // Validar coincidencia de contraseñas
                 if (newPass !== confirmPass) {
-                    alert('Las contraseñas nuevas no coinciden');
+                    alert('¡Error! Las contraseñas nuevas no coinciden.');
                     return;
                 }
 
+                // Validar contraseña actual (solo usuarios normales)
                 if (!isAdmin) {
                     const currentPass = document.getElementById('currentPass').value;
                     if (users[currentUser].password !== currentPass) {
-                        alert('Contraseña actual incorrecta');
+                        alert('¡Error! Contraseña actual incorrecta.');
                         return;
                     }
                 }
 
-                // Actualizar y guardar
+                // Actualizar contraseña
                 users[username].password = newPass;
                 localStorage.setItem('users', JSON.stringify(users));
-                
-                // Redirección forzada
+
+                // Registrar actividad
+                logActivity(currentUser, 'password_change', `Actualizó contraseña de ${username}`);
+
+                // Redirigir al login
                 alert('Contraseña actualizada. Redirigiendo...');
-                sessionStorage.removeItem('username');
-                window.location.href = 'index.html';
+                sessionStorage.removeItem('username'); // Cerrar sesión
+                window.location.href = 'index.html';   // Redirección
             });
         });
     </script>
