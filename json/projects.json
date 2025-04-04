@@ -1,16 +1,18 @@
-{
-    "proyectos": [
-        {
-            "id": 1,
-            "nombre": "Implementación ERP",
-            "estado": "En progreso",
-            "fecha": "2023-08-30"
-        },
-        {
-            "id": 2,
-            "nombre": "Migración a la nube",
-            "estado": "Pendiente",
-            "fecha": "2023-09-15"
-        }
-    ]
-}
+// En menu.html, antes del cierre de </body>
+<script>
+    fetch('data/projects.json')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('projectsContainer');
+            if(data.proyectos.length === 0) {
+                container.innerHTML = '<p class="no-projects">Sin proyectos activos</p>';
+            } else {
+                container.innerHTML = data.proyectos.map(proyecto => `
+                    <div class="project-item">
+                        <span>${proyecto.nombre}</span>
+                        <button onclick="viewProject(${proyecto.id})">Ver</button>
+                    </div>
+                `).join('');
+            }
+        });
+</script>
