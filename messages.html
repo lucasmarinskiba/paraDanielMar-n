@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mensajes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-content">
+        <h1>Mensajes Internos</h1>
+        <div class="chat-container">
+            <div class="chat-list box">
+                <h2>Chats</h2>
+                <button onclick="startNewChat()">Nuevo Chat</button>
+                <ul id="chat-list"></ul>
+            </div>
+            <div class="message-area box">
+                <h2 id="chat-title">Selecciona un chat</h2>
+                <div id="message-container" class="messages"></div>
+                <div class="input-area">
+                    <input type="text" id="message-input" placeholder="Escribe un mensaje...">
+                    <button onclick="sendMessage()">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="messages.js"></script>
+</body>
+</html>
