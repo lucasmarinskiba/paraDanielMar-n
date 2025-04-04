@@ -379,3 +379,23 @@ body {
     from { transform: translateY(-50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
+
+/* Proyectos Activos */
+.projects-summary {
+    margin-top: 20px;
+}
+
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    margin: 8px 0;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.no-projects {
+    text-align: center;
+    color: #6c757d;
+    padding: 20px;
+}
