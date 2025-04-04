@@ -6,6 +6,70 @@
     <title>Menú Principal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos para modales */
+        .modal-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            width: 500px;
+            max-width: 90%;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-btn {
+            background: #0d6efd;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+    </style>
 </head>
 <body>
     <header class="main-header">
@@ -134,6 +198,79 @@
         </section>
     </main>
 
+    <!-- Modales -->
+    <div class="modal-container" id="uploadModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3><i class="fas fa-file-upload"></i> Subir Documento</h3>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label>Título del documento:</label>
+                    <input type="text" id="docTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción:</label>
+                    <textarea id="docDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Archivo:</label>
+                    <input type="file" id="documentFile" required>
+                </div>
+                <button type="submit" class="modal-btn">Subir</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-container" id="meetingModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3><i class="fas fa-calendar-plus"></i> Nueva Reunión</h3>
+            <form id="meetingForm">
+                <div class="form-group">
+                    <label>Título de la reunión:</label>
+                    <input type="text" id="meetingTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Fecha y hora:</label>
+                    <input type="datetime-local" id="meetingTime" required>
+                </div>
+                <div class="form-group">
+                    <label>Participantes:</label>
+                    <select id="participants" multiple>
+                        <option value="admin">Administrador</option>
+                        <option value="usuario">Usuario Ejemplo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Temática:</label>
+                    <textarea id="meetingTopic" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="modal-btn">Programar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-container" id="messageModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3><i class="fas fa-envelope"></i> Mensaje Directo</h3>
+            <form id="messageForm">
+                <div class="form-group">
+                    <label>Destinatario:</label>
+                    <select id="recipient">
+                        <option value="admin">Administrador</option>
+                        <option value="todos">Todos los usuarios</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Mensaje:</label>
+                    <textarea id="messageContent" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="modal-btn">Enviar</button>
+            </form>
+        </div>
+    </div>
+
     <script src="js/auth.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -151,9 +288,59 @@
             // Lógica básica de notificaciones
             const notificationBadge = document.querySelector('.badge');
             setInterval(() => {
-                // Actualizar contador de notificaciones
                 notificationBadge.textContent = Math.floor(Math.random() * 5);
             }, 60000);
+
+            // Manejo de modales
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const action = e.target.closest('button').textContent.trim();
+                    switch(action) {
+                        case 'Subir Documento':
+                            showModal('uploadModal');
+                            break;
+                        case 'Nueva Reunión':
+                            showModal('meetingModal');
+                            break;
+                        case 'Mensaje Directo':
+                            showModal('messageModal');
+                            break;
+                    }
+                });
+            });
+
+            document.querySelectorAll('.close-modal').forEach(closeBtn => {
+                closeBtn.addEventListener('click', () => {
+                    closeModal(closeBtn.closest('.modal-container').id);
+                });
+            });
+
+            // Manejo de formularios
+            document.getElementById('uploadForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Documento subido exitosamente');
+                closeModal('uploadModal');
+            });
+
+            document.getElementById('meetingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Reunión programada exitosamente');
+                closeModal('meetingModal');
+            });
+
+            document.getElementById('messageForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Mensaje enviado exitosamente');
+                closeModal('messageModal');
+            });
+
+            function showModal(modalId) {
+                document.getElementById(modalId).style.display = 'block';
+            }
+
+            function closeModal(modalId) {
+                document.getElementById(modalId).style.display = 'none';
+            }
         });
     </script>
 </body>
