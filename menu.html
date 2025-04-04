@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Principal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,9 +13,13 @@
             <a href="menu.html" class="logo-link">
                 <img src="images/Marín Daniel lopotipo2.png" alt="Logo" class="logo">
             </a>
-            <h1>Sistema</h1>
+            <h1>Sistema Interno</h1>
         </div>
         <div class="user-info">
+            <div class="notifications-badge">
+                <i class="fas fa-bell"></i>
+                <span class="badge">3</span>
+            </div>
             <span id="loggedInUser"></span>
             <button id="logoutButton" class="logout-button">Cerrar sesión</button>
         </div>
@@ -23,27 +28,132 @@
     <main class="main-content">
         <nav class="menu-nav">
             <ul>
-                <li><a href="change-pass.html">Cambiar contraseña</a></li>
-                <li id="adminLink"><a href="admin.html">Administración</a></li>
-                <li id="logsLink"><a href="logs.html">Registros</a></li>
+                <li><a href="#dashboard"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#tasks"><i class="fas fa-tasks"></i> Gestión de Proyectos</a></li>
+                <li><a href="#comms"><i class="fas fa-comments"></i> Comunicación</a></li>
+                <li><a href="#resources"><i class="fas fa-folder-open"></i> Recursos</a></li>
+                <li><a href="#schedule"><i class="fas fa-calendar-alt"></i> Horarios</a></li>
+                <li><a href="change-pass.html"><i class="fas fa-key"></i> Cambiar contraseña</a></li>
+                <li id="adminLink"><a href="admin.html"><i class="fas fa-user-cog"></i> Administración</a></li>
+                <li id="logsLink"><a href="logs.html"><i class="fas fa-clipboard-list"></i> Registros</a></li>
             </ul>
         </nav>
         
+        <!-- Panel Principal -->
         <section class="content-section">
-            <h2>Bienvenido <span id="welcomeUser"></span></h2>
-            <p>Seleccione una opción del menú.</p>
+            <!-- Sección de Notificaciones -->
+            <div class="notifications-panel">
+                <h2><i class="fas fa-exclamation-circle"></i> Alertas Urgentes</h2>
+                <div class="alert urgent">
+                    <span class="alert-title">Entrega Informe Trimestral</span>
+                    <span class="alert-date">Vence: 15/08/2023</span>
+                </div>
+                <div class="alert meeting">
+                    <span class="alert-title">Reunión de Equipo</span>
+                    <span class="alert-date">Hoy 15:00hs</span>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="dashboard-grid">
+                <!-- Resumen de Tareas -->
+                <div class="dashboard-card tasks-summary">
+                    <h3><i class="fas fa-clipboard-list"></i> Tus Tareas</h3>
+                    <div class="task-item high-priority">
+                        <span class="task-title">Revisar contrato cliente</span>
+                        <span class="task-status">Pendiente</span>
+                    </div>
+                    <div class="task-item medium-priority">
+                        <span class="task-title">Actualizar base de datos</span>
+                        <span class="task-status">En Progreso</span>
+                    </div>
+                </div>
+
+                <!-- Accesos Rápidos -->
+                <div class="dashboard-card quick-actions">
+                    <h3><i class="fas fa-bolt"></i> Accesos Rápidos</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn"><i class="fas fa-file-upload"></i> Subir Documento</button>
+                        <button class="action-btn"><i class="fas fa-calendar-plus"></i> Nueva Reunión</button>
+                        <button class="action-btn"><i class="fas fa-envelope"></i> Mensaje Directo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gestión de Proyectos -->
+            <div class="projects-section">
+                <h2><i class="fas fa-project-diagram"></i> Proyectos Activos</h2>
+                <div class="calendar-view">
+                    <!-- Implementar calendario interactivo aquí -->
+                </div>
+                <div class="project-timeline">
+                    <!-- Implementar línea de tiempo de proyectos -->
+                </div>
+            </div>
+
+            <!-- Comunicación Interna -->
+            <div class="comms-section">
+                <div class="chat-container">
+                    <h3><i class="fas fa-comment-dots"></i> Chat de Equipo</h3>
+                    <div class="chat-messages"></div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="Escribe un mensaje...">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+                <div class="forums-section">
+                    <h3><i class="fas fa-users"></i> Foros por Departamento</h3>
+                    <div class="forum-category">
+                        <div class="forum-item contabilidad">
+                            <i class="fas fa-calculator"></i>
+                            <span>Equipo Contabilidad</span>
+                        </div>
+                        <div class="forum-item desarrollo">
+                            <i class="fas fa-code"></i>
+                            <span>Equipo Desarrollo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gestión de Horarios -->
+            <div class="schedule-section">
+                <div class="timesheet">
+                    <h3><i class="fas fa-clock"></i> Registro de Horas</h3>
+                    <table class="timesheet-table">
+                        <!-- Tabla de registro de horas -->
+                    </table>
+                </div>
+                <div class="vacation-requests">
+                    <h3><i class="fas fa-umbrella-beach"></i> Solicitar Día Libre</h3>
+                    <form class="request-form">
+                        <!-- Formulario de solicitud -->
+                    </form>
+                </div>
+            </div>
         </section>
     </main>
-    
+
     <script src="js/auth.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const user = sessionStorage.getItem('username');
             const isAdmin = users[user]?.role === 'admin';
             
+            // Mostrar información de usuario
             document.getElementById('welcomeUser').textContent = user;
+            document.getElementById('loggedInUser').textContent = user;
+            
+            // Control de visibilidad para administradores
             document.getElementById('adminLink').style.display = isAdmin ? 'block' : 'none';
             document.getElementById('logsLink').style.display = isAdmin ? 'block' : 'none';
+
+            // Lógica básica de notificaciones
+            const notificationBadge = document.querySelector('.badge');
+            setInterval(() => {
+                // Actualizar contador de notificaciones
+                notificationBadge.textContent = Math.floor(Math.random() * 5);
+            }, 60000);
         });
     </script>
 </body>
