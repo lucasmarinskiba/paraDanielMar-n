@@ -1,3 +1,8 @@
+const username = sessionStorage.getItem('username');
+if (!username) {
+    window.location.href = '/paraDanielMar-n/index.html';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Cargar usuarios desde localStorage
     let users = JSON.parse(localStorage.getItem('users')) || {
@@ -46,5 +51,21 @@ document.addEventListener('DOMContentLoaded', function() {
             console.warn('Usuario no autenticado. Redirigiendo...');
             window.location.href = '/paraDanielMar-n/index.html';
         }
+    }
+});
+
+// Cerrar cesion
+document.addEventListener('DOMContentLoaded', function() {
+    const logoutButton = document.getElementById('logoutButton');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Eliminar datos de sesión
+            sessionStorage.removeItem('username');
+            
+            // Redirigir a login con ruta absoluta
+            window.location.href = '/paraDanielMar-n/index.html'; 
+        });
     }
 });
