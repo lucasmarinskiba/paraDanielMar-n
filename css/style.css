@@ -399,3 +399,54 @@ body {
     color: #6c757d;
     padding: 20px;
 }
+
+.chat-container {
+    display: flex;
+    gap: 20px;
+}
+
+.chat-list {
+    width: 300px;
+}
+
+.message-area {
+    flex-grow: 1;
+}
+
+.messages {
+    height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.message {
+    margin: 10px 0;
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sent {
+    background-color: #0084ff;
+    color: white;
+    margin-left: auto;
+}
+
+.received {
+    background-color: #e9ecef;
+    margin-right: auto;
+}
+
+.input-area {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.input-area input {
+    width: 80%;
+    padding: 5px;
+}
+
+.input-area button {
+    padding: 5px 10px;
+}
