@@ -6,24 +6,32 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header class="main-header">
+        <!-- Mismo header que menu.html -->
+    </header>
     <div class="main-content">
         <h1>Mensajes Internos</h1>
         <div class="chat-container">
-            <div class="chat-list box">
-                <h2>Chats</h2>
-                <button onclick="startNewChat()">Nuevo Chat</button>
-                <ul id="chat-list"></ul>
-            </div>
-            <div class="message-area box">
-                <h2 id="chat-title">Selecciona un chat</h2>
-                <div id="message-container" class="messages"></div>
-                <div class="input-area">
-                    <input type="text" id="message-input" placeholder="Escribe un mensaje...">
-                    <button onclick="sendMessage()">Enviar</button>
+            <main class="main-content">
+                <h2>Bandeja de Entrada</h2>
+                <div class="messages-container">
+                     <!-- Mensajes cargados dinámicamente -->
+                </div>
+                <div class="chat-list box">
+                    <h2>Chats</h2>
+                    <button onclick="startNewChat()">Nuevo Chat</button>
+                    <ul id="chat-list"></ul>
+                </div>
+                <div class="message-area box">
+                    <h2 id="chat-title">Selecciona un chat</h2>
+                    <div id="message-container" class="messages"></div>
+                    <div class="input-area">
+                        <input type="text" id="message-input" placeholder="Escribe un mensaje...">
+                        <button onclick="sendMessage()">Enviar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <script src="messages.js"></script>
-</body>
+</body>   
 </html>
