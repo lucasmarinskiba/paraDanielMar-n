@@ -1,0 +1,16 @@
+{
+    "proyectos": [
+        {
+            "id": 1,
+            "nombre": "Implementación ERP",
+            "estado": "En progreso",
+            "fecha": "2023-08-30"
+        },
+        {
+            "id": 2,
+            "nombre": "Migración a la nube",
+            "estado": "Pendiente",
+            "fecha": "2023-09-15"
+        }
+    ]
+}
