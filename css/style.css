@@ -300,3 +300,57 @@ body {
     padding: 3px 8px;
     font-size: 0.8em;
 }
+
+/* Agregar estos estilos */
+.quick-access-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin: 8px 0;
+    background: #f8f9fa;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.access-checkbox {
+    display: none; /* Oculta el checkbox nativo */
+}
+
+.check-icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #0d6efd;
+    border-radius: 4px;
+    margin-right: 12px;
+    position: relative;
+}
+
+.access-checkbox:checked + .check-icon {
+    background: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.access-checkbox:checked + .check-icon::after {
+    content: "\f00c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.access-text {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.quick-access-item:hover {
+    background: #e2e6ea;
+    transform: translateY(-2px);
+}
