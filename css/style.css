@@ -354,3 +354,28 @@ body {
     background: #e2e6ea;
     transform: translateY(-2px);
 }
+
+/* Funcionalidad de secciones */
+.hidden {
+    display: none !important;
+}
+
+.menu-nav li.active {
+    background-color: #f0f0f0;
+    border-left: 4px solid #3498db;
+}
+
+/* Mejoras de modales */
+.modal-container {
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    animation: modalSlide 0.3s ease-out;
+}
+
+@keyframes modalSlide {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
