@@ -69,3 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Manejar logout
+document.getElementById('logoutButton')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem('username');
+    window.location.href = '/paraDanielMar-n/index.html';
+});
