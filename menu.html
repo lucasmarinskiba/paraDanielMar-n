@@ -149,22 +149,53 @@
             </div>
 
             <!-- Gestión de Proyectos -->
+            <!-- Gestión de Proyectos -->
             <div class="projects-section">
-                <h3><i class="fas fa-bolt"></i> Proyectos Activos</h3>
-                <div id="projectsContainer">
-                    <!-- Proyectos cargados desde JSON -->
-                </div>
-                <ul id="project-list"></ul>
-                <div class="calendar-view">
-                    <!-- Implementar calendario interactivo aquí -->
-                </div>
-                <div class="project-timeline">
-                    <!-- Implementar línea de tiempo de proyectos -->
-                </div>
-                <div id="projectsList">
-                   <!-- Proyectos cargados dinámicamente -->
-                </div>
+                 <div class="projects-header">
+                      <h3><i class="fas fa-bolt"></i> Proyectos Activos <span id="activeProjectsCount" class="badge">0</span></h3>
+                      <button id="newProjectBtn" class="btn-primary">
+                         <i class="fas fa-plus"></i> Nuevo Proyecto
+                      </button>
+                 </div>
+    
+                <div class="projects-card">
+                     <div id="projectsContainer">
+                           <!-- Mensaje cuando no hay proyectos -->
+                           <div id="noProjectsMessage" class="no-projects">
+                                <i class="fas fa-folder-open"></i>
+                                <p>No tienes proyectos activos en este momento</p>
+                                    <button id="startFirstProject" class="btn-secondary">
+                                       <i class="fas fa-rocket"></i> Crear mi primer proyecto
+                                    </button>
+                           </div>
+            
+                          <!-- Lista de proyectos activos -->
+                              <ul id="project-list" class="project-list">
+                                    <!-- Proyectos cargados dinámicamente -->
+                              </ul>
+                    </div>
+        
+                    <div class="projects-actions">
+                        <button id="continueAllProjects" class="btn-action" disabled>
+                              <i class="fas fa-play-circle"></i> Continuar todos
+                        </button>
+                   </div>
             </div>
+    
+    <div class="projects-secondary">
+        <div class="calendar-view">
+            <h4><i class="fas fa-calendar-alt"></i> Calendario</h4>
+            <!-- Implementar calendario interactivo aquí -->
+            <div id="miniCalendar"></div>
+        </div>
+        
+        <div class="project-timeline">
+            <h4><i class="fas fa-chart-line"></i> Progreso</h4>
+            <!-- Implementar línea de tiempo de proyectos -->
+            <div id="timelineChart"></div>
+        </div>
+    </div>
+</div>
 
             <!-- Comunicación Interna -->
             <div class="comms-section">
