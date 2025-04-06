@@ -448,6 +448,20 @@
                 document.getElementById(modalId).style.display = 'none';
             }
         });
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+             const logsLink = document.getElementById('logsLink');
+                 if(logsLink) {
+                     logsLink.addEventListener('click', function(e) {
+                        console.log('Intentando navegar a logs.html');
+                        // window.location.href = 'logs.html'; // Descomenta si necesitas forzar la navegación
+                        });
+                 } else {
+                     console.error('Elemento logsLink no encontrado');
+                 }
+        });
+</script>
     </script>
 </body>
 </html>
