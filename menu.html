@@ -191,17 +191,17 @@
                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                          <form id="projectForm" enctype="multipart/form-data">
+                                          <form id="projectForm" enctype="multipart/form-data" class="needs-validation" novalidate>
                                                 <div class="mb-3">
                                                      <label for="projectName" class="form-label">Nombre del Proyecto*</label>
                                                      <input type="text" class="form-control" id="projectName" required>
                                                 </div>
     
                                                 <div class="mb-3">
-                                                      <label for="projectFiles" class="form-label">Subir Archivos</label>
-                                                      <input type="file" class="form-control" id="projectFiles" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.txt,.js,.html,.css,.py,.java,.cpp,.csv">
-                                                      <div class="form-text">Formatos aceptados: imágenes, documentos, archivos de código (max 25MB)</div>
-                                                </div>
+                                                     <label for="formFile" class="form-label">Subir archivos</label>
+                                                     <input class="form-control" type="file" id="formFile" multiple 
+                                                     accept="image/*,.pdf,.doc,.docx,.xlsx,.pptx,.zip,.rar">
+                                                     </div>
     
                                                 <div id="filePreview" class="file-preview-container mb-3">
                                                       <!-- Vista previa de archivos aparecerá aquí -->
