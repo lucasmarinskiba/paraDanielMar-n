@@ -191,37 +191,26 @@
                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                          <form id="projectForm">
-                                          <div class="mb-3">
-                                               <label for="projectName" class="form-label">Nombre del Proyecto</label>
-                                               <input type="text" class="form-control" id="projectName" required>
-                                          </div>
-                        
-                                          <div class="mb-3">
-                                                 <label for="projectDescription" class="form-label">Descripción</label>
-                                                 <textarea class="form-control" id="projectDescription" rows="3"></textarea>
-                                          </div>
-                        
-                                          <div class="mb-3">
-                                                 <label for="projectDeadline" class="form-label">Fecha límite</label>
-                                                 <input type="date" class="form-control" id="projectDeadline">
-                                          </div>
-                        
-                                          <div class="mb-3">
-                                               <label class="form-label">Subir Archivos</label>
-                                               <div class="file-upload-container">
-                                                     <input type="file" class="form-control" id="projectFiles" multiple accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.pdf,.zip,.rar,.txt,.js,.html,.css,.py,.java,.cpp,.csv">
-                                                     <div class="file-upload-info">
-                                                           <small class="text-muted">Formatos aceptados: Excel, Word, PowerPoint, imágenes (JPG, PNG, GIF), PDF, archivos de código (JS, HTML, CSS, PY, Java, C++), TXT, CSV, ZIP, RAR</small>
-                                                           <small id="fileSizeWarning" class="text-warning">Tamaño máximo por archivo: 25MB</small>
-                                                     </div>
-                                               </div>
-                                         </div>
-                        
-                                         <div id="filePreview" class="file-preview-container">
-                                              <!-- Vista previa de archivos seleccionados -->
-                                         </div>
-                                         </form>
+                                          <form id="projectForm" enctype="multipart/form-data">
+                                                <div class="mb-3">
+                                                     <label for="projectName" class="form-label">Nombre del Proyecto*</label>
+                                                     <input type="text" class="form-control" id="projectName" required>
+                                                </div>
+    
+                                                <div class="mb-3">
+                                                      <label for="projectFiles" class="form-label">Subir Archivos</label>
+                                                      <input type="file" class="form-control" id="projectFiles" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.txt,.js,.html,.css,.py,.java,.cpp,.csv">
+                                                      <div class="form-text">Formatos aceptados: imágenes, documentos, archivos de código (max 25MB)</div>
+                                                </div>
+    
+                                                <div id="filePreview" class="file-preview-container mb-3">
+                                                      <!-- Vista previa de archivos aparecerá aquí -->
+                                                </div>
+    
+                                                <button type="submit" class="btn btn-primary">
+                                                          <i class="fas fa-upload"></i> Crear y Subir Archivos
+                                                </button>
+                                        </form>
                                    </div>
                                    <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
