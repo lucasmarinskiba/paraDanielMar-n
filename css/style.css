@@ -166,6 +166,8 @@ body {
     .menu-nav {
         width: 100%;
     }
+    .dashboard-grid {
+        grid-template-columns: 1fr;
 }
 
 #changePassForm div {
@@ -199,7 +201,14 @@ body {
     --border-radius: 10px;
     --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
-
+    
+.dashboard-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    margin: 0 auto;
+}
+      
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
