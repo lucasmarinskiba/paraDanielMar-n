@@ -8,6 +8,10 @@ body {
     overflow-x: hidden;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 /* Header */
 .main-header {
     display: flex;
