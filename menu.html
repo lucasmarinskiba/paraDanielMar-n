@@ -1,986 +1,499 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Principal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* Estilos para modales */
-        .modal-container {
-            display: none;
-
-            position: fixed;
-
-            top: 0;
-
-            left: 0;
-
-            width: 100%;
-
-            height: 100%;
-
-            background: rgba(0,0,0,0.5);
-
-            z-index: 1000;
-
-        }
-
-
-
-        .modal-content {
-
-            background: white;
-
-            width: 500px;
-
-            max-width: 90%;
-
-            margin: 50px auto;
-
-            padding: 20px;
-
-            border-radius: 8px;
-
-            position: relative;
-
-        }
-
-
-
-        .close-modal {
-
-            position: absolute;
-
-            right: 20px;
-
-            top: 15px;
-
-            font-size: 24px;
-
-            cursor: pointer;
-
-        }
-
-
-
-        .modal-btn {
-
-            background: #0d6efd;
-
-            color: white;
-
-            padding: 10px 20px;
-
-            border: none;
-
-            border-radius: 4px;
-
-            cursor: pointer;
-
-        }
-
-
-
-        .form-group {
-
-            margin-bottom: 15px;
-
-        }
-
-
-
-        .form-group label {
-
-            display: block;
-
-            margin-bottom: 5px;
-
-            font-weight: bold;
-
-        }
-
-
-
-        .form-group input,
-
-        .form-group textarea,
-
-        .form-group select {
-
-            width: 100%;
-
-            padding: 8px;
-
-            border: 1px solid #ddd;
-
-            border-radius: 4px;
-
-            box-sizing: border-box;
-
-        }
-
-
-
-        .form-group textarea {
-
-            resize: vertical;
-
-        }
-
-    </style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos para modales */
+        .modal-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            width: 500px;
+            max-width: 90%;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-btn {
+            background: #0d6efd;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+    </style>
 </head>
-
 <body>
-
-    <header class="main-header">
-
-        <div class="logo-container">
-
-            <a href="menu.html" class="logo-link">
-
-                <img src="images/Marín Daniel lopotipo2.png" alt="Logo" class="logo">
-
-            </a>
-
-            <h1>Sistema Interno</h1>
-
-        </div>
-
-        <div class="user-info">
-
-            <div class="notifications-badge">
-
-                <i class="fas fa-bell"></i>
-
-                <span class="badge">Ninguna</span>
-
-            </div>
-
-            <span id="loggedInUser"></span>
-
-            <button id="logoutButton" class="logout-button">Cerrar sesión</button>
-
-        </div>
-
-    </header>
-
-    
-
-    <main class="main-content">
-
-        <nav class="menu-nav">
-
-            <h2>Menú</h2>
-
-               <ul>
-
-                   <li><a href="https://lucasmarinskiba.github.io/paraDanielMar-n/menu.html" class="active"><i class="fas fa-home"></i> Inicio</a></li>
-
-                   <li><a href="https://lucasmarinskiba.github.io/paraDanielMar-n/messages.html"><i class="fas fa-comments"></i> Mensajes</a></li>
-
-                   <li><a href="change-pass.html">Cambiar contraseña</a></li>
-
-                   <li id="adminLink"><a href="admin.html">Administración</a></li>
-
-                   <li><a href="logs.html" class="active">Registros</a></li>
-
-              </ul>
-
-        </nav>
-
-        
-
-        <!-- Panel Principal -->
-
-        <section class="content-section">
-
-            <!-- Sección de Notificaciones -->
-
-            <div class="notifications-panel">
-
-                <h2><i class="fas fa-exclamation-circle"></i> Alertas Urgentes</h2>
-
-                <div class="alert urgent">
-
-                    <span class="alert-title">Entrega Informe Trimestral</span>
-
-                    <span class="alert-date">Vence: No determinada</span>
-
-                </div>
-
-                <div class="alert meeting">
-
-                    <span class="alert-title">Reunión de Equipo</span>
-
-                    <span class="alert-date">Fecha: Hora: </span>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- Dashboard -->
-
-            <div class="dashboard-grid">
-
-                <!-- Resumen de Tareas -->
-
-                <div class="dashboard-card tasks-summary">
-
-                    <h3><i class="fas fa-clipboard-list"></i> Tus Tareas</h3>
-
-                    <div class="task-item high-priority">
-
-                        <span class="task-title">Revisar contrato cliente</span>
-
-                        <span class="task-status">Pendiente</span>
-
-                    </div>
-
-                    <div class="task-item medium-priority">
-
-                        <span class="task-title">Actualizar base de datos</span>
-
-                        <span class="task-status">En Progreso</span>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- Accesos Rápidos -->
-
-                <div class="dashboard-card quick-actions">
-
-                    <h3><i class="fas fa-bolt"></i> Accesos Rápidos</h3>
-
-                    <div class="action-buttons">
-
-                        <button class="action-btn" data-action="uploadModal">
-
-                            <i class="fas fa-file-upload"></i> Subir Documento
-
-                        </button>
-
-                        <button class="action-btn" data-action="meetingModal">
-
-                            <i class="fas fa-calendar-plus"></i> Nueva Reunión
-
-                        </button>
-
-                        <button class="action-btn" data-action="messageModal">
-
-                            <i class="fas fa-envelope"></i> Mensaje Directo
-
-                        </button>
-
-                   </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- Gestión de Proyectos -->
-
-            <!-- Gestión de Proyectos -->
-
-           <div class="projects-section">
-
-                <div class="projects-header">
-
-                     <h3><i class="fas fa-bolt"></i> Proyectos Activos <span id="activeProjectsCount" class="badge">0</span></h3>
-
-                     <button id="newProjectBtn" class="btn-primary" data-bs-toggle="modal" data-bs-target="#newProjectModal">
-
-                        <i class="fas fa-plus"></i> Nuevo Proyecto
-
-                     </button>
-
-              </div>
-
-    
-
-              <div class="projects-card">
-
-                    <div id="projectsContainer">
-
-                         <!-- Mensaje cuando no hay proyectos -->
-
-                         <div id="noProjectsMessage" class="no-projects">
-
-                              <i class="fas fa-folder-open"></i>
-
-                                 <p>No tienes proyectos activos en este momento</p>
-
-                                     <button id="startFirstProject" class="btn-secondary" data-bs-toggle="modal" data-bs-target="#newProjectModal">
-
-                                              <i class="fas fa-rocket"></i> Crear mi primer proyecto
-
-                                     </button>
-
-                       </div>
-
-            
-
-                       <!-- Lista de proyectos activos -->
-
-                           <ul id="project-list" class="project-list">
-
-                                <!-- Proyectos cargados dinámicamente -->
-
-                           </ul>
-
-                      </div>
-
-        
-
-                      <div class="projects-actions">
-
-                            <button id="continueAllProjects" class="btn-action" disabled>
-
-                                 <i class="fas fa-play-circle"></i> Continuar todos
-
-                            </button>
-
-                     </div>
-
-              </div>
-
-    
-
-              <!-- Modal para nuevo proyecto -->
-
-              <div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel" aria-hidden="true">
-
-                        <div class="modal-dialog modal-lg">
-
-                               <div class="modal-content">
-
-                                    <div class="modal-header">
-
-                                         <h5 class="modal-title" id="newProjectModalLabel"><i class="fas fa-plus-circle"></i> Crear Nuevo Proyecto</h5>
-
-                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                                    </div>
-
-                                    <div class="modal-body">
-
-                                          <form id="projectForm" enctype="multipart/form-data" class="needs-validation" novalidate>
-
-                                                <div class="mb-3">
-
-                                                     <label for="projectName" class="form-label">Nombre del Proyecto*</label>
-
-                                                     <input type="text" class="form-control" id="projectName" required>
-
-                                                </div>
-
-    
-
-                                                <div class="mb-3">
-
-                                                     <label for="formFile" class="form-label">Subir archivos</label>
-
-                                                     <input class="form-control" type="file" id="formFile" multiple 
-
-                                                     accept="image/*,.pdf,.doc,.docx,.xlsx,.pptx,.zip,.rar">
-
-                                                     </div>
-
-    
-
-                                                <div id="filePreview" class="file-preview-container mb-3">
-
-                                                      <!-- Vista previa de archivos aparecerá aquí -->
-
-                                                </div>
-
-    
-
-                                                <button type="submit" class="btn btn-primary">
-
-                                                          <i class="fas fa-upload"></i> Crear y Subir Archivos
-
-                                                </button>
-
-                                        </form>
-
-                                   </div>
-
-                                   <div class="modal-footer">
-
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-
-                                        <button type="submit" form="projectForm" class="btn btn-primary">Crear Proyecto</button>
-
-                                   </div>
-
-                             </div>
-
-                      </div>
-
-              </div>
-
-    
-
-              <div class="projects-secondary">
-
-                    <div class="calendar-view">
-
-                         <h4><i class="fas fa-calendar-alt"></i> Calendario</h4>
-
-                         <div id="miniCalendar"></div>
-
-                        </div>
-
-        
-
-                       <div class="project-timeline">
-
-                             <h4><i class="fas fa-chart-line"></i> Progreso</h4>
-
-                             <div id="timelineChart"></div>
-
-                             </div>
-
-                       </div>
-
-                  </div>
-
-    
-
-                  <div class="projects-secondary">
-
-                       <div class="calendar-view">
-
-                            <h4><i class="fas fa-calendar-alt"></i> Calendario</h4>
-
-                            <!-- Implementar calendario interactivo aquí -->
-
-                            <div id="miniCalendar"></div>
-
-                            </div>
-
-        
-
-                        <div class="project-timeline">
-
-                             <h4><i class="fas fa-chart-line"></i> Progreso</h4>
-
-                             <!-- Implementar línea de tiempo de proyectos -->
-
-                             <div id="timelineChart"></div>
-
-                             </div>
-
-                       </div>
-
-                 </div>
-
-
-
-                 <!-- Comunicación Interna -->
-
-                 <div class="dashboard-grid">
-
-                 <!-- Chat de Equipo -->
-
-                 <div class="dashboard-card message-card">
-
-                      <div class="card-header">
-
-                            <h3><i class="fas fa-comments"></i> Chat de Equipo</h3>
-
-                      </div>
-
-                      <div class="card-body">
-
-                             <div class="message-container" id="teamChat">
-
-                                      <!-- Mensajes aparecerán aquí -->
-
-                             </div>
-
-                             <div class="message-input">
-
-                                   <input type="text" placeholder="Escribe un mensaje...">
-
-                                      <button class="send-btn"><i class="fas fa-paper-plane"></i></button>
-
-                             </div>
-
-                      </div>
-
-               </div>
-
-
-
-               <!-- Foros por Departamento -->
-
-               <div class="dashboard-card forums-card">
-
-                     <div class="card-header">
-
-                             <h3><i class="fas fa-users"></i> Foros por Departamento</h3>
-
-                     </div>
-
-                     <div class="card-body">
-
-                           <ul class="forum-list">
-
-                                <li class="forum-item accounting-team">
-
-                                       <i class="fas fa-calculator"></i> Equipo Contabilidad
-
-                                </li>
-
-                                <li class="forum-item dev-team">
-
-                                     <i class="fas fa-code"></i> Equipo Desarrollo
-
-                                </li>
-
-                                <li class="forum-item">
-
-                                      <i class="fas fa-shopping-cart"></i> Equipo Ventas
-
-                                </li>
-
-                                <li class="forum-item">
-
-                                       <i class="fas fa-headset"></i> Equipo Soporte
-
-                                </li>
-
-                          </ul>
-
-                   </div>
-
-            </div>
-
-
-
-            <!-- Registro de Horas -->
-
-            <div class="dashboard-card hours-card">
-
-                  <div class="card-header">
-
-                        <h3><i class="fas fa-clock"></i> Registro de Horas</h3>
-
-                  </div>
-
-                  <div class="card-body">
-
-                         <div class="time-tracker">
-
-                               <div class="current-time">00:00:00</div>
-
-                                     <button class="timer-btn start-btn"><i class="fas fa-play"></i> Iniciar</button>
-
-                                     <button class="timer-btn stop-btn" disabled><i class="fas fa-stop"></i> Detener</button>
-
-                               </div>
-
-                               <div class="time-history">
-
-                                      <h4>Historial Semanal</h4>
-
-                                        <!-- Historial aparecerá aquí -->
-
-                               </div>
-
-                        </div>
-
-                 </div>
-
-
-
-                 <!-- Solicitar Día Libre -->
-
-                 <div class="dashboard-card dayoff-card">
-
-                        <div class="card-header">
-
-                              <h3><i class="fas fa-umbrella-beach"></i> Solicitar Día Libre</h3>
-
-                        </div>
-
-                        <div class="card-body">
-
-                              <form class="dayoff-form">
-
-                                    <div class="form-group">
-
-                                         <label>Fecha:</label>
-
-                                         <input type="date" class="date-picker">
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <label>Motivo:</label>
-
-                                        <select class="reason-select">
-
-                                               <option>Enfermedad</option>
-
-                                               <option>Asuntos personales</option>
-
-                                               <option>Vacaciones</option>
-
-                                        </select>
-
-                                   </div>
-
-                                   <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Enviar Solicitud</button>
-
-                             </form>
-
-                       </div>
-
-                 </div>
-
-           </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- Modales -->
-
-    <div class="modal-container" id="uploadModal">
-
-        <div class="modal-content">
-
-            <span class="close-modal">&times;</span>
-
-            <h3><i class="fas fa-file-upload"></i> Subir Documento</h3>
-
-            <form id="uploadForm">
-
-                <div class="form-group">
-
-                    <label>Título del documento:</label>
-
-                    <input type="text" id="docTitle" required>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Descripción:</label>
-
-                    <textarea id="docDescription" rows="3"></textarea>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Archivo:</label>
-
-                    <input type="file" id="documentFile" required>
-
-                </div>
-
-                <button type="submit" class="modal-btn">Subir</button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="modal-container" id="meetingModal">
-
-        <div class="modal-content">
-
-            <span class="close-modal">&times;</span>
-
-            <h3><i class="fas fa-calendar-plus"></i> Nueva Reunión</h3>
-
-            <form id="meetingForm">
-
-                <div class="form-group">
-
-                    <label>Título de la reunión:</label>
-
-                    <input type="text" id="meetingTitle" required>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Fecha y hora:</label>
-
-                    <input type="datetime-local" id="meetingTime" required>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Participantes:</label>
-
-                    <select id="participants" multiple>
-
-                        <option value="admin">Administrador</option>
-
-                        <option value="usuario">Usuario Ejemplo</option>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Temática:</label>
-
-                    <textarea id="meetingTopic" rows="3" required></textarea>
-
-                </div>
-
-                <button type="submit" class="modal-btn">Programar</button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="modal-container" id="messageModal">
-
-        <div class="modal-content">
-
-            <span class="close-modal">&times;</span>
-
-            <h3><i class="fas fa-envelope"></i> Mensaje Directo</h3>
-
-            <form id="messageForm">
-
-                <div class="form-group">
-
-                    <label>Destinatario:</label>
-
-                    <select id="recipient">
-
-                        <option value="admin">Administrador</option>
-
-                        <option value="todos">Todos los usuarios</option>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Mensaje:</label>
-
-                    <textarea id="messageContent" rows="4" required></textarea>
-
-                </div>
-
-                <button type="submit" class="modal-btn">Enviar</button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-
-    <script src="js/auth.js"></script>
-
-    <script src="js/dashboard.js"></script>
-
-    
-
-    <script>
-
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const user = sessionStorage.getItem('username');
-
-            const isAdmin = users[user]?.role === 'admin';
-
-            
-
-            // Mostrar información de usuario
-
-            document.getElementById('welcomeUser').textContent = user;
-
-            document.getElementById('loggedInUser').textContent = user;
-
-            
-
-            // Control de visibilidad para administradores
-
-            document.getElementById('adminLink').style.display = isAdmin ? 'block' : 'none';
-
-            document.getElementById('logsLink').style.display = isAdmin ? 'block' : 'none';
-
-
-
-            // Lógica básica de notificaciones
-
-            const notificationBadge = document.querySelector('.badge');
-
-            setInterval(() => {
-
-                notificationBadge.textContent = Math.floor(Math.random() * 5);
-
-            }, 60000);
-
-
-
-            // Manejo de modales
-
-            document.querySelectorAll('.action-btn').forEach(btn => {
-
-                btn.addEventListener('click', (e) => {
-
-                    const action = e.target.closest('button').textContent.trim();
-
-                    switch(action) {
-
-                        case 'Subir Documento':
-
-                            showModal('uploadModal');
-
-                            break;
-
-                        case 'Nueva Reunión':
-
-                            showModal('meetingModal');
-
-                            break;
-
-                        case 'Mensaje Directo':
-
-                            showModal('messageModal');
-
-                            break;
-
-                    }
-
-                });
-
-            });
-
-
-
-            document.querySelectorAll('.close-modal').forEach(closeBtn => {
-
-                closeBtn.addEventListener('click', () => {
-
-                    closeModal(closeBtn.closest('.modal-container').id);
-
-                });
-
-            });
-
-
-
-            // Manejo de formularios
-
-            document.getElementById('uploadForm').addEventListener('submit', function(e) {
-
-                e.preventDefault();
-
-                alert('Documento subido exitosamente');
-
-                closeModal('uploadModal');
-
-            });
-
-
-
-            document.getElementById('meetingForm').addEventListener('submit', function(e) {
-
-                e.preventDefault();
-
-                alert('Reunión programada exitosamente');
-
-                closeModal('meetingModal');
-
-            });
-
-
-
-            document.getElementById('messageForm').addEventListener('submit', function(e) {
-
-                e.preventDefault();
-
-                alert('Mensaje enviado exitosamente');
-
-                closeModal('messageModal');
-
-            });
-
-
-
-            function showModal(modalId) {
-
-                document.getElementById(modalId).style.display = 'block';
-
-            }
-
-
-
-            function closeModal(modalId) {
-
-                document.getElementById(modalId).style.display = 'none';
-
-            }
-
-        });
-
-
-
-        <script>
-
-        document.addEventListener('DOMContentLoaded', function() {
-
-             const logsLink = document.getElementById('logsLink');
-
-                 if(logsLink) {
-
-                     logsLink.addEventListener('click', function(e) {
-
-                        console.log('Intentando navegar a logs.html');
-
-                        // window.location.href = 'logs.html'; // Descomenta si necesitas forzar la navegación
-
-                        });
-
-                 } else {
-
-                     console.error('Elemento logsLink no encontrado');
-
-                 }
-
-        });
-
-</script>
-
-    </script>
-
-</body>
-
+    <header class="main-header">
+        <div class="logo-container">
+            <a href="menu.html" class="logo-link">
+                <img src="images/Marín Daniel lopotipo2.png" alt="Logo" class="logo">
+            </a>
+            <h1>Sistema Interno</h1>
+        </div>
+        <div class="user-info">
+            <div class="notifications-badge">
+                <i class="fas fa-bell"></i>
+                <span class="badge">Ninguna</span>
+            </div>
+            <span id="loggedInUser"></span>
+            <button id="logoutButton" class="logout-button">Cerrar sesión</button>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <nav class="menu-nav">
+            <h2>Menú</h2>
+               <ul>
+                   <li><a href="https://lucasmarinskiba.github.io/paraDanielMar-n/menu.html" class="active"><i class="fas fa-home"></i> Inicio</a></li>
+                   <li><a href="https://lucasmarinskiba.github.io/paraDanielMar-n/messages.html"><i class="fas fa-comments"></i> Mensajes</a></li>
+                   <li><a href="change-pass.html">Cambiar contraseña</a></li>
+                   <li id="adminLink"><a href="admin.html">Administración</a></li>
+                   <li><a href="logs.html" class="active">Registros</a></li>
+              </ul>
+        </nav>
+        
+        <!-- Panel Principal -->
+        <section class="content-section">
+            <!-- Sección de Notificaciones -->
+            <div class="notifications-panel">
+                <h2><i class="fas fa-exclamation-circle"></i> Alertas Urgentes</h2>
+                <div class="alert urgent">
+                    <span class="alert-title">Entrega Informe Trimestral</span>
+                    <span class="alert-date">Vence: No determinada</span>
+                </div>
+                <div class="alert meeting">
+                    <span class="alert-title">Reunión de Equipo</span>
+                    <span class="alert-date">Fecha: Hora: </span>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="dashboard-grid">
+                <!-- Resumen de Tareas -->
+                <div class="dashboard-card tasks-summary">
+                    <h3><i class="fas fa-clipboard-list"></i> Tus Tareas</h3>
+                    <div class="task-item high-priority">
+                        <span class="task-title">Revisar contrato cliente</span>
+                        <span class="task-status">Pendiente</span>
+                    </div>
+                    <div class="task-item medium-priority">
+                        <span class="task-title">Actualizar base de datos</span>
+                        <span class="task-status">En Progreso</span>
+                    </div>
+                </div>
+
+                <!-- Accesos Rápidos -->
+                <div class="dashboard-card quick-actions">
+                    <h3><i class="fas fa-bolt"></i> Accesos Rápidos</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn" data-action="uploadModal">
+                            <i class="fas fa-file-upload"></i> Subir Documento
+                        </button>
+                        <button class="action-btn" data-action="meetingModal">
+                            <i class="fas fa-calendar-plus"></i> Nueva Reunión
+                        </button>
+                        <button class="action-btn" data-action="messageModal">
+                            <i class="fas fa-envelope"></i> Mensaje Directo
+                        </button>
+                   </div>
+                </div>
+            </div>
+
+            <!-- Gestión de Proyectos -->
+            <!-- Gestión de Proyectos -->
+           <div class="projects-section">
+                <div class="projects-header">
+                     <h3><i class="fas fa-bolt"></i> Proyectos Activos <span id="activeProjectsCount" class="badge">0</span></h3>
+                     <button id="newProjectBtn" class="btn-primary" data-bs-toggle="modal" data-bs-target="#newProjectModal">
+                        <i class="fas fa-plus"></i> Nuevo Proyecto
+                     </button>
+              </div>
+    
+              <div class="projects-card">
+                    <div id="projectsContainer">
+                         <!-- Mensaje cuando no hay proyectos -->
+                         <div id="noProjectsMessage" class="no-projects">
+                              <i class="fas fa-folder-open"></i>
+                                 <p>No tienes proyectos activos en este momento</p>
+                                     <button id="startFirstProject" class="btn-secondary" data-bs-toggle="modal" data-bs-target="#newProjectModal">
+                                              <i class="fas fa-rocket"></i> Crear mi primer proyecto
+                                     </button>
+                       </div>
+            
+                       <!-- Lista de proyectos activos -->
+                           <ul id="project-list" class="project-list">
+                                <!-- Proyectos cargados dinámicamente -->
+                           </ul>
+                      </div>
+        
+                      <div class="projects-actions">
+                            <button id="continueAllProjects" class="btn-action" disabled>
+                                 <i class="fas fa-play-circle"></i> Continuar todos
+                            </button>
+                     </div>
+              </div>
+    
+              <!-- Modal para nuevo proyecto -->
+              <div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                               <div class="modal-content">
+                                    <div class="modal-header">
+                                         <h5 class="modal-title" id="newProjectModalLabel"><i class="fas fa-plus-circle"></i> Crear Nuevo Proyecto</h5>
+                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                          <form id="projectForm" enctype="multipart/form-data" class="needs-validation" novalidate>
+                                                <div class="mb-3">
+                                                     <label for="projectName" class="form-label">Nombre del Proyecto*</label>
+                                                     <input type="text" class="form-control" id="projectName" required>
+                                                </div>
+    
+                                                <div class="mb-3">
+                                                     <label for="formFile" class="form-label">Subir archivos</label>
+                                                     <input class="form-control" type="file" id="formFile" multiple 
+                                                     accept="image/*,.pdf,.doc,.docx,.xlsx,.pptx,.zip,.rar">
+                                                     </div>
+    
+                                                <div id="filePreview" class="file-preview-container mb-3">
+                                                      <!-- Vista previa de archivos aparecerá aquí -->
+                                                </div>
+    
+                                                <button type="submit" class="btn btn-primary">
+                                                          <i class="fas fa-upload"></i> Crear y Subir Archivos
+                                                </button>
+                                        </form>
+                                   </div>
+                                   <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" form="projectForm" class="btn btn-primary">Crear Proyecto</button>
+                                   </div>
+                             </div>
+                      </div>
+              </div>
+    
+              <div class="projects-secondary">
+                    <div class="calendar-view">
+                         <h4><i class="fas fa-calendar-alt"></i> Calendario</h4>
+                         <div id="miniCalendar"></div>
+                        </div>
+        
+                       <div class="project-timeline">
+                             <h4><i class="fas fa-chart-line"></i> Progreso</h4>
+                             <div id="timelineChart"></div>
+                             </div>
+                       </div>
+                  </div>
+    
+                  <div class="projects-secondary">
+                       <div class="calendar-view">
+                            <h4><i class="fas fa-calendar-alt"></i> Calendario</h4>
+                            <!-- Implementar calendario interactivo aquí -->
+                            <div id="miniCalendar"></div>
+                            </div>
+        
+                        <div class="project-timeline">
+                             <h4><i class="fas fa-chart-line"></i> Progreso</h4>
+                             <!-- Implementar línea de tiempo de proyectos -->
+                             <div id="timelineChart"></div>
+                             </div>
+                       </div>
+                 </div>
+
+                 <!-- Comunicación Interna -->
+                 <div class="dashboard-grid">
+                 <!-- Chat de Equipo -->
+                 <div class="dashboard-card message-card">
+                      <div class="card-header">
+                            <h3><i class="fas fa-comments"></i> Chat de Equipo</h3>
+                      </div>
+                      <div class="card-body">
+                             <div class="message-container" id="teamChat">
+                                      <!-- Mensajes aparecerán aquí -->
+                             </div>
+                             <div class="message-input">
+                                   <input type="text" placeholder="Escribe un mensaje...">
+                                      <button class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                             </div>
+                      </div>
+               </div>
+
+               <!-- Foros por Departamento -->
+               <div class="dashboard-card forums-card">
+                     <div class="card-header">
+                             <h3><i class="fas fa-users"></i> Foros por Departamento</h3>
+                     </div>
+                     <div class="card-body">
+                           <ul class="forum-list">
+                                <li class="forum-item accounting-team">
+                                       <i class="fas fa-calculator"></i> Equipo Contabilidad
+                                </li>
+                                <li class="forum-item dev-team">
+                                     <i class="fas fa-code"></i> Equipo Desarrollo
+                                </li>
+                                <li class="forum-item">
+                                      <i class="fas fa-shopping-cart"></i> Equipo Ventas
+                                </li>
+                                <li class="forum-item">
+                                       <i class="fas fa-headset"></i> Equipo Soporte
+                                </li>
+                          </ul>
+                   </div>
+            </div>
+
+            <!-- Registro de Horas -->
+            <div class="dashboard-card hours-card">
+                  <div class="card-header">
+                        <h3><i class="fas fa-clock"></i> Registro de Horas</h3>
+                  </div>
+                  <div class="card-body">
+                         <div class="time-tracker">
+                               <div class="current-time">00:00:00</div>
+                                     <button class="timer-btn start-btn"><i class="fas fa-play"></i> Iniciar</button>
+                                     <button class="timer-btn stop-btn" disabled><i class="fas fa-stop"></i> Detener</button>
+                               </div>
+                               <div class="time-history">
+                                      <h4>Historial Semanal</h4>
+                                        <!-- Historial aparecerá aquí -->
+                               </div>
+                        </div>
+                 </div>
+
+                 <!-- Solicitar Día Libre -->
+                 <div class="dashboard-card dayoff-card">
+                        <div class="card-header">
+                              <h3><i class="fas fa-umbrella-beach"></i> Solicitar Día Libre</h3>
+                        </div>
+                        <div class="card-body">
+                              <form class="dayoff-form">
+                                    <div class="form-group">
+                                         <label>Fecha:</label>
+                                         <input type="date" class="date-picker">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Motivo:</label>
+                                        <select class="reason-select">
+                                               <option>Enfermedad</option>
+                                               <option>Asuntos personales</option>
+                                               <option>Vacaciones</option>
+                                        </select>
+                                   </div>
+                                   <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Enviar Solicitud</button>
+                             </form>
+                       </div>
+                 </div>
+           </div>
+        </section>
+    </main>
+
+    <!-- Modales -->
+    <div class="modal-container" id="uploadModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3><i class="fas fa-file-upload"></i> Subir Documento</h3>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label>Título del documento:</label>
+                    <input type="text" id="docTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción:</label>
+                    <textarea id="docDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Archivo:</label>
+                    <input type="file" id="documentFile" required>
+                </div>
+                <button type="submit" class="modal-btn">Subir</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-container" id="meetingModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3><i class="fas fa-calendar-plus"></i> Nueva Reunión</h3>
+            <form id="meetingForm">
+                <div class="form-group">
+                    <label>Título de la reunión:</label>
+                    <input type="text" id="meetingTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Fecha y hora:</label>
+                    <input type="datetime-local" id="meetingTime" required>
+                </div>
+                <div class="form-group">
+                    <label>Participantes:</label>
+                    <select id="participants" multiple>
+                        <option value="admin">Administrador</option>
+                        <option value="usuario">Usuario Ejemplo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Temática:</label>
+                    <textarea id="meetingTopic" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="modal-btn">Programar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-container" id="messageModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3><i class="fas fa-envelope"></i> Mensaje Directo</h3>
+            <form id="messageForm">
+                <div class="form-group">
+                    <label>Destinatario:</label>
+                    <select id="recipient">
+                        <option value="admin">Administrador</option>
+                        <option value="todos">Todos los usuarios</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Mensaje:</label>
+                    <textarea id="messageContent" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="modal-btn">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = sessionStorage.getItem('username');
+            const isAdmin = users[user]?.role === 'admin';
+            
+            // Mostrar información de usuario
+            document.getElementById('welcomeUser').textContent = user;
+            document.getElementById('loggedInUser').textContent = user;
+            
+            // Control de visibilidad para administradores
+            document.getElementById('adminLink').style.display = isAdmin ? 'block' : 'none';
+            document.getElementById('logsLink').style.display = isAdmin ? 'block' : 'none';
+
+            // Lógica básica de notificaciones
+            const notificationBadge = document.querySelector('.badge');
+            setInterval(() => {
+                notificationBadge.textContent = Math.floor(Math.random() * 5);
+            }, 60000);
+
+            // Manejo de modales
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const action = e.target.closest('button').textContent.trim();
+                    switch(action) {
+                        case 'Subir Documento':
+                            showModal('uploadModal');
+                            break;
+                        case 'Nueva Reunión':
+                            showModal('meetingModal');
+                            break;
+                        case 'Mensaje Directo':
+                            showModal('messageModal');
+                            break;
+                    }
+                });
+            });
+
+            document.querySelectorAll('.close-modal').forEach(closeBtn => {
+                closeBtn.addEventListener('click', () => {
+                    closeModal(closeBtn.closest('.modal-container').id);
+                });
+            });
+
+            // Manejo de formularios
+            document.getElementById('uploadForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Documento subido exitosamente');
+                closeModal('uploadModal');
+            });
+
+            document.getElementById('meetingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Reunión programada exitosamente');
+                closeModal('meetingModal');
+            });
+
+            document.getElementById('messageForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Mensaje enviado exitosamente');
+                closeModal('messageModal');
+            });
+
+            function showModal(modalId) {
+                document.getElementById(modalId).style.display = 'block';
+            }
+
+            function closeModal(modalId) {
+                document.getElementById(modalId).style.display = 'none';
+            }
+        });
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+             const logsLink = document.getElementById('logsLink');
+                 if(logsLink) {
+                     logsLink.addEventListener('click', function(e) {
+                        console.log('Intentando navegar a logs.html');
+                        // window.location.href = 'logs.html'; // Descomenta si necesitas forzar la navegación
+                        });
+                 } else {
+                     console.error('Elemento logsLink no encontrado');
+                 }
+        });
+        </script>
+    </script>
+  </body>
 </html>
